@@ -1,1 +1,122 @@
-<p>report-view works!</p>
+<div class="spinner" *ngIf="overAllStats==null">
+    <mat-spinner></mat-spinner>
+  </div>
+<div class="header" *ngIf="overAllStats!=null">
+    <button type="button" class="btn btn-primary back" (click)="back()">← back</button>
+    <div class="right-header" *ngIf="selectedUser != null" >
+        <h2 class="name">{{selectedUser.name}} [S-{{selectedUser.squad}}]</h2>
+        <p>&nbsp;&nbsp;</p>
+        <button type="button" (click)="downloadreport()" class="card-btn btn">Download Report</button>
+    </div> 
+</div>
+<div class="body" *ngIf="overAllStats!=null">
+    <mat-tab-group mat-align-tabs="center" animationDuration="200ms">
+        <mat-tab label="Daily Log">
+            <div class="content">
+               <h3> Select Date : <input class="date" type="date"  [(ngModel)]="date" placeholder="Select date" required></h3>
+                <button type="button" class="btn btn-primary submit" (click)="getDaily(date)">Get Log</button>
+                <button *ngIf="dailyReports != null" type="button" (click)="downloadLog()" class="btn btn-primary download">Download Log</button>
+            </div> 
+            <div class="list" *ngIf="dailyReports != null">
+                <div >
+                    <table mat-table [dataSource] = "dailyReports" matSort class = "mat-elevation-z8"> 
+                        <ng-container matColumnDef = "Projects">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Projects</h3></th>
+                            <td mat-cell *matCellDef = "let element">{{element.project}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef = "Date">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Date</h3></th>
+                            <td mat-cell *matCellDef = "let element">{{returnDateLog(element.created_at)}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef = "Duration">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Durations (min)</h3></th>
+                            <td mat-cell *matCellDef = "let element">{{element.duration / 60 | number}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef = "Start">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Time</h3></th>
+                            <td mat-cell *matCellDef = "let element">{{returnTimeLog(element.created_at)}}</td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
+                        <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr> 
+                    </table>       
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Schedule Report">
+            <div class="content">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Range</mat-label>
+                    <!-- <mat-select > -->
+                    <mat-select [(value)]="range">
+                        <mat-option *ngFor="let rang of ranges" value="{{rang.value}}">{{rang.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <button type="button" class="btn btn-primary" (click)="getSheduleReport()">Get Report</button>
+            </div>
+            <div class="report" *ngIf="best_day != ''">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">Total Hours</div>
+                    <div class="card-body">
+                        <p class="card-text">{{all_data.human_readable_total}}</p>
+                    </div>
+                </div>
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">Best Day</div>
+                    <div class="card-body">
+                        <p class="card-text">Date : {{best_day.date}}</p>
+                        <p class="card-text">Time : {{best_day.text}}</p>
+                    </div>
+                </div>
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">Attendance</div>
+                    <div class="card-body">
+                        <p class="card-text">Present : {{all_data.days_minus_holidays}} days</p>
+                        <p class="card-text">Absent : {{all_data.holidays}} days</p>
+                    </div>
+                </div>
+            </div>
+            <hr *ngIf="best_day != ''">
+            <div *ngIf="best_day != ''"  class="chart">
+                <div style="display: block;">
+                <h2><mat-label>Language Details</mat-label></h2>
+                <canvas baseChart
+                    [data]="languageTime"
+                    [labels]="languageName"
+                    [legend]="pieChartLegend"
+                    [chartType]="polarAreaChartType"
+                    [colors]="bgColor">
+                </canvas>
+                </div>
+                <hr *ngIf="best_day != ''">
+                <div >
+                <h2> <mat-label>Project Details</mat-label></h2>
+                    <canvas baseChart 
+                        [data]="WorkingProjectTime" 
+                        [labels]="workingProjectTitle" 
+                        [chartType]="pieChartType"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins"
+                        [legend]="pieChartLegend"
+                        [colors]="bgColor">
+                    </canvas>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Project Details">
+            <div class="content">
+                <h2>Last 7 Days Project Details</h2>
+            </div>
+            <div class="project-tab">
+                <canvas baseChart 
+                    [data]="projectTime" 
+                    [labels]="projectTitle" 
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend"
+                    [colors]="bgColor">
+                </canvas>
+            </div> 
+        </mat-tab>
+    </mat-tab-group>
+</div>

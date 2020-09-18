@@ -59,7 +59,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { ReportViewComponent } from './report-view/report-view.component';
+import { SquadViewComponent } from './squad-view/squad-view.component';
 // import {FormControl, FormGroup, Validators} from '@angular/forms';
+
+import { ChartsModule } from 'ng2-charts';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { LoginComponent } from './login/login.component';
+
 
 
 @NgModule({
@@ -69,11 +75,14 @@ import { ReportViewComponent } from './report-view/report-view.component';
     UsersComponent,
     ReportComponent,
     DashboardComponent,
-    ReportViewComponent
+    ReportViewComponent,
+    SquadViewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     MatTableModule,
     BrowserAnimationsModule,
     MatSelectModule,
@@ -124,10 +133,10 @@ import { ReportViewComponent } from './report-view/report-view.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    
-  
+    ChartsModule,
+    Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

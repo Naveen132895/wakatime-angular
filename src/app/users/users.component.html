@@ -1,17 +1,34 @@
-<table mat-table [dataSource] = "dataSource" matSort class = "mat-elevation-z8"> 
-  <ng-container matColumnDef = "name">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-     <td mat-cell *matCellDef = "let element"> {{element.name}} </td>
-  </ng-container>
-  <ng-container matColumnDef = "squad">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header>Squad</th>
-     <td mat-cell *matCellDef = "let element"> {{element.squad}} </td>
-  </ng-container>
-  <ng-container matColumnDef = "uid">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header>Uid</th>
-     <td mat-cell *matCellDef = "let element"> {{element.uid}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
-  <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
-</table>
-  
+<div class="header" >
+   <h2>ProGrads</h2>
+ </div>
+ <div class="body">
+    <!-- Search -->
+   <div class="search">
+      <input class="form-control" type="text" name="search" (keyup)="applyFilter($event.target.value)" placeholder="Enter Name or Id...">
+   </div>
+   <table mat-table [dataSource] = "dataSource" matSort class = "mat-elevation-z8"> 
+      <ng-container matColumnDef = "name">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+         <td mat-cell *matCellDef = "let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef = "squad">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header>Squad</th>
+         <td mat-cell *matCellDef = "let element"> {{element.squad}} </td>
+      </ng-container>
+      <ng-container matColumnDef = "uid">
+         <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+         <td mat-cell *matCellDef = "let element"> 
+            <a (click)="edit(element)"><span class="material-icons">create</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a (click)="delete(element)"><span class="material-icons">clear</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a (click)="refresh(element)"><span class="material-icons"> refresh</span></a>
+         </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
+      <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
+   </table>
+   <!-- paginator -->
+   <div>
+      <mat-paginator class="size" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+   </div>
+</div>
+

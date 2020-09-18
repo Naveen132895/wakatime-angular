@@ -1,0 +1,26 @@
+<!-- Loading Spinner -->
+<div class="spinner" *ngIf="total==null">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- Header -->
+<div class="header" *ngIf="total!=null">
+    <button type="button" class="btn bbtn back" (click)="back()">← back</button>
+    <h2 class="bbtn">Total ProGrads : 0{{squadDetails.length}}</h2>
+</div>
+<!-- Search -->
+<div class="search" *ngIf="total!=null">
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Enter ProGrad's Name...">
+</div>
+<!-- Content -->
+<div  class="card-container" *ngIf="total!=null">
+  <div *ngFor="let user of squadDetails | filter:searchText; let i = index">
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">{{i+1}}</p>
+            <h2 class="card-title">{{user.name}}</h2>
+            <h1>{{user.squad}}</h1>
+            <button class="btn card-btn" (click)="getReport(user.uid)">Insight</button>
+        </div>
+    </div>
+  </div>
+</div> 

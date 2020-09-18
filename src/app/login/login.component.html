@@ -1,0 +1,33 @@
+<div class="main">
+  <div class="card-body">
+    <img src="../../assets/Logo Pink@2x.png" >
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" id="myform">
+        <p>Login Credentials</p>
+  
+      <div class="form-group">
+        <input type="text" formControlName="email" class="form-control" placeholder="Email"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <input type="password" formControlName="password" class="form-control" autocomplete="on" placeholder="Password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button id="orange">Login</button>
+      </div>
+    </form>
+  </div>
+  <div >
+    <img class="time" src="../../assets/time.jpg" alt="Time">
+  </div>
+</div>

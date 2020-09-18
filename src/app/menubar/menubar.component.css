@@ -1,6 +1,10 @@
  .sidebar {
-    background-color: rgb(236, 122, 76);
+    background-color: #1b2227;
     height: 100%;
+  }
+  svg{
+    position: absolute;
+    margin-left: -5px;
   }
   
   .sidebar li {
@@ -8,23 +12,22 @@
   }
 
    .sidebar a {
-    color: black;
+    color: white;
     display: flex;
     flex-direction: row;
     padding: 10%;
-    font-size: 1.5em;
+    font-size: 1rem;
     font-weight: 400;
     text-decoration: none;
   }
 
   .sidebar a.active {
-    background-color: #00d48a;
-    color: white;
+    color: #00D48A;
   }
   
   .sidebar a:hover:not(.active) {
-    background-color: #a200ffee;
-    color: white;
+    background-color: #00d48a2f;
+    color: #00D48A;
   }
   #logo{
     margin-top: 5%;

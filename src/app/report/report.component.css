@@ -3,22 +3,96 @@
     height: 8vh;
     background-color: white;
     border:1px solid white;
+    top: 0;
+    z-index: 10000;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
 }
+
+.header>h2:nth-child(1){
+    margin: 1%;
+}
+
+.header>h2:nth-child(2){
+    margin: 1.5vh 20% auto auto       
+}
+
+.spinner{
+    margin: 30vh auto auto 47%;
+}
+
+.squad{
+    width: 8rem;
+    height: 5vh;
+    border-radius: 17px;
+    padding: 2px;
+}
+.totalsq{
+    width: 12rem;
+    height: 5vh;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.search{
+    margin: 15vh auto auto 8%;
+}
+
+.search>input{
+    width: 10rem;
+    border: 1px solid #00D48A;
+    border-radius: 8px;
+
+}
+
 .card-container{
     width: 85%;
     display: flex;
     flex-wrap: wrap;
-    margin: auto auto auto auto;
+    margin: 5vh auto auto auto;
 }
+
 .card{
     width: 15rem;
-    margin: 10vh 1rem 1rem 2%;
+    margin: 1vh 1.3rem 1rem 3%;
     text-align: center;
-    border: 1px solid #a200ffee;
+    border: 1px solid #00D48A;
     border-radius: 20px;
 }
+
+.card-btn{
+    background-color: #00D48A;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    border: 2px solid #00D48A;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+    background-color: rgb(253, 253, 253);
+}
+
 .logo{
     margin-top: 10%;
     width: 25%;
     align-self: center;
+}
+
+.bbtn{
+    background-color: #00D48A;
+    color: white;
+    text-align: center;
+    
+}
+
+button{
+    padding-top: 1;
+}
+
+button:hover{
+    transform: scale(1.05);
+     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
 }

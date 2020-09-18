@@ -1,15 +1,25 @@
-<div class="header">
-  
+<!-- Loading Spinner -->
+<div class="spinner" *ngIf="totalSquad==null">
+  <mat-spinner></mat-spinner>
 </div>
-<div  class="card-container" >
-  <div *ngFor="let squad of totalSquad">
-    <div class="card" (click)="getSquad(squad)">
+<!-- Header -->
+<div class="header" *ngIf="totalSquad!=null" >
+  <h2 class="squad bbtn">Squads</h2>
+  <h2 class="totalsq bbtn">Total Squad : 0{{totalSquad.length}}</h2>
+</div> 
+<!-- Search Box -->
+<div class="search" *ngIf="totalSquad!=null">
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Enter Squad Id...">
+</div>
+<!-- Content -->
+<div  class="card-container" *ngIf="totalSquad!=null">
+  <div *ngFor="let squad of totalSquad | filter:searchText; let i= index;" >
+    <div class="card">
         <div class="card-body">
+          <p class="card-text">{{i+1}}</p>
             <h2 class="card-title">Squad</h2>
-            <h1>{{squad}}</h1>
-            <p class="card-text">Members : 10</p>
-            <p class="card-text">Status : active</p>
-            <a class="btn btn-primary">View</a>
+            <h1>{{squad.res}}</h1>
+            <button class="btn card-btn" (click)="getSquad(squad.res)">View</button>
         </div>
     </div>
   </div>
