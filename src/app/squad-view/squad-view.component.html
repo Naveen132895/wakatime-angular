@@ -5,7 +5,8 @@
 <!-- Header -->
 <div class="header" *ngIf="total!=null">
     <button type="button" class="btn bbtn back" (click)="back()">← back</button>
-    <h2 class="bbtn">Total ProGrads : 0{{squadDetails.length}}</h2>
+    <h3 *ngIf="id != 1" class="bbtn">Total ProGrads : 0{{squadDetails.length}}</h3>
+    <h3 *ngIf="id == 1" class="bbtn">Total Mentors : 0{{squadDetails.length}}</h3>
 </div>
 <!-- Search -->
 <div class="search" *ngIf="total!=null">
@@ -18,7 +19,8 @@
         <div class="card-body">
             <p class="card-text">{{i+1}}</p>
             <h2 class="card-title">{{user.name}}</h2>
-            <h1>{{user.squad}}</h1>
+            <h1 *ngIf="user.squad != 1">{{user.squad}}</h1>
+            <h3 *ngIf="user.squad == 1">Mentor</h3>
             <button class="btn card-btn" (click)="getReport(user.uid)">Insight</button>
         </div>
     </div>

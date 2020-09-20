@@ -1,34 +1,50 @@
 <div class="header" >
-   <h2>ProGrads</h2>
- </div>
- <div class="body">
-    <!-- Search -->
-   <div class="search">
-      <input class="form-control" type="text" name="search" (keyup)="applyFilter($event.target.value)" placeholder="Enter Name or Id...">
-   </div>
-   <table mat-table [dataSource] = "dataSource" matSort class = "mat-elevation-z8"> 
-      <ng-container matColumnDef = "name">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-         <td mat-cell *matCellDef = "let element"> {{element.name}} </td>
-      </ng-container>
-      <ng-container matColumnDef = "squad">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header>Squad</th>
-         <td mat-cell *matCellDef = "let element"> {{element.squad}} </td>
-      </ng-container>
-      <ng-container matColumnDef = "uid">
-         <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-         <td mat-cell *matCellDef = "let element"> 
-            <a (click)="edit(element)"><span class="material-icons">create</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a (click)="delete(element)"><span class="material-icons">clear</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a (click)="refresh(element)"><span class="material-icons"> refresh</span></a>
-         </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
-      <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
-   </table>
-   <!-- paginator -->
-   <div>
-      <mat-paginator class="size" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+   <h3>Users Management</h3>
+</div>
+<!-- Loading Spinner -->
+<div class="spinner" *ngIf="dataSource == null">
+   <mat-spinner></mat-spinner>
+</div>
+<div class="body">
+   <div *ngIf="!isUpdateOn">
+      <!-- Search -->
+      <div class="search">
+         <input class="form-control" type="text" name="search" (keyup)="applyFilter($event.target.value)" placeholder="Enter Name or Id...">
+      </div>
+      <table mat-table [dataSource] = "dataSource" matSort class = "mat-elevation-z8"> 
+         <ng-container matColumnDef = "name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef = "let element"> {{element.name}} </td>
+         </ng-container>
+         <ng-container matColumnDef = "squad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Squad</th>
+            <td mat-cell *matCellDef = "let element" > <span *ngIf="element.squad != 1">{{element.squad}} </span><span *ngIf="element.squad == 1"> Mentor </span></td>
+         </ng-container>
+         <ng-container matColumnDef = "actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef = "let element"> 
+               <a (click)="edit(element)"><span class="material-icons">create</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <a (click)="delete(element)"><span class="material-icons">clear</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <a (click)="refresh(element)"><span class="material-icons"> refresh</span></a>
+            </td>
+         </ng-container>
+         <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
+         <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
+      </table>
+      <!-- paginator -->
+      <div>
+         <mat-paginator class="size" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+      </div>
    </div>
 </div>
-
+<div class="wrapper animated fadeInDown" *ngIf="isUpdateOn">
+   <div id="formContent">
+     <div class="first">
+       <h2>Update Details</h2>
+     </div>
+       <input type="text" [(ngModel)]="updateValue.name" class="second" placeholder="name">
+       <input type="text" [(ngModel)]="updateValue.squad" class="second" placeholder="squad">
+       <input type="submit" class="btn bbtn third" (click)="update()" value="update">
+       <input type="submit" class="btn bbtn third" (click)="clear()" value="cancel">
+   </div>
+ </div>

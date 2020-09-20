@@ -1,6 +1,6 @@
 .header{
     width: 100%;
-    height: 8vh;
+    height: 9vh;
     background-color: white;
     border:1px solid white;
     top: 0;
@@ -8,4 +8,33 @@
     position: fixed;
     display: flex;
     justify-content: space-between;
+  }
+.header>h3{
+    width: 9rem;
+    text-align: center;
+    margin: 1.2vh auto auto 1%;
+    border-radius: 20px;
+    padding: 7px;
+    background-color: #00D48A;
+    color: white;
+}
+.spinner{
+    margin: 30vh auto auto 47%;
+}
+.content{
+    /* display: flex; */
+    width: 90%;
+    margin: 10vh 2% 2% 2%;
+    /* justify-content: space-evenly; */
+    overflow: hidden;    
+}
+.report{
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
+    justify-content: space-around;
+    padding: 3%;
+    text-align: center;
+}
+.overall{
+    margin: 3% auto auto 2%;
 }

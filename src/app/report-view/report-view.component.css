@@ -30,18 +30,21 @@
     width: 100%;
     margin: 8vh 1% auto auto;
 }
-
 .content{
     display: flex;
     width: 90%;
-    margin: 2% 2% 2% 2%;
+    margin: 3% 2% 2% 2%;
     justify-content: space-evenly;
     overflow: hidden;    
 }
-.btn-primary{
+.btn{
     background-color: #00D48A;
-    border: 1px solid #00D48A;
+    border: 2px solid #00D48A;
     height:fit-content;
+    color: white;
+}
+.extra{
+    margin-top: 6vh;
 }
 .card-btn{
     background-color: #00D48A;
@@ -49,8 +52,17 @@
     text-align: center;
     border-radius: 5px;
 }
+.download{
+    margin: auto 5% 1% auto;
+    float: right;
+
+}
+.input{
+    border: 1px solid black;
+}
 .submit{
     margin-top: 4vh;
+    position: relative;
 }
 
 .date{
@@ -58,6 +70,7 @@
     height: 7vh;
     border-radius: 5px;
     padding: 2%;
+    position: relative;
 }
 
 .list{
@@ -72,7 +85,9 @@ table {
 th.mat-sort-header-sorted {
     color: rgb(235, 11, 11);
 }
-
+tr{
+    border: 2px solid lightgrey;
+}
 .project-tab{
     display: block;
     width: 80%;
@@ -95,4 +110,7 @@ th.mat-sort-header-sorted {
 button:hover{
     transform: scale(1.05);
      box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+.nodata{
+    margin: 25vh 30% auto 32%;
 }

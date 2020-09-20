@@ -2,9 +2,10 @@
     <mat-spinner></mat-spinner>
   </div>
 <div class="header" *ngIf="overAllStats!=null">
-    <button type="button" class="btn btn-primary back" (click)="back()">← back</button>
+    <button type="button" class="btn back" (click)="back()">← back</button>
     <div class="right-header" *ngIf="selectedUser != null" >
-        <h2 class="name">{{selectedUser.name}} [S-{{selectedUser.squad}}]</h2>
+        <h2 *ngIf="selectedUser.squad != 1" class="name">{{selectedUser.name}} [S-{{selectedUser.squad}}]</h2>
+        <h2 *ngIf="selectedUser.squad == 1" class="name">{{selectedUser.name}} [Mentor]</h2>
         <p>&nbsp;&nbsp;</p>
         <button type="button" (click)="downloadreport()" class="card-btn btn">Download Report</button>
     </div> 
@@ -15,10 +16,10 @@
             <div class="content">
                <h3> Select Date : <input class="date" type="date"  [(ngModel)]="date" placeholder="Select date" required></h3>
                 <button type="button" class="btn btn-primary submit" (click)="getDaily(date)">Get Log</button>
-                <button *ngIf="dailyReports != null" type="button" (click)="downloadLog()" class="btn btn-primary download">Download Log</button>
             </div> 
             <div class="list" *ngIf="dailyReports != null">
                 <div >
+                    <button  type="button" (click)="downloadLog()" class="btn btn-primary download">Download Log</button>
                     <table mat-table [dataSource] = "dailyReports" matSort class = "mat-elevation-z8"> 
                         <ng-container matColumnDef = "Projects">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header><h3>Projects</h3></th>
@@ -41,9 +42,12 @@
                     </table>       
                 </div>
             </div>
+            <div *ngIf="nodata" class="nodata">
+                <h2>There is no log availabe for the selected date...!</h2>
+            </div>
         </mat-tab>
         <mat-tab label="Schedule Report">
-            <div class="content">
+            <div class="content extra">
                 <mat-form-field appearance="outline">
                     <mat-label>Select Range</mat-label>
                     <!-- <mat-select > -->
@@ -51,7 +55,7 @@
                         <mat-option *ngFor="let rang of ranges" value="{{rang.value}}">{{rang.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
-                <button type="button" class="btn btn-primary" (click)="getSheduleReport()">Get Report</button>
+                <button type="button" class="btn bbtn" (click)="getSheduleReport()">Get Report</button>
             </div>
             <div class="report" *ngIf="best_day != ''">
                 <div class="card text-white bg-secondary mb-3">

@@ -10,7 +10,7 @@ import {Location} from '@angular/common';
 })
 export class SquadViewComponent implements OnInit {
 
-  private id : number;
+  id : number;
   squadDetails : any[];
   total : any;
   searchText : string;

@@ -1,11 +1,15 @@
 import {Component, AfterViewInit, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import{Wakatime} from "../wakatime";
-import{WakatimeService} from "../services/wakatime.service";
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+
+import{Wakatime} from "../wakatime";
+import{WakatimeService} from "../services/wakatime.service";
+import{ UserService } from "../services/user.service";
+import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-users',
@@ -14,13 +18,18 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class UsersComponent implements OnInit {
 
+  updateValue : any;
+  isUpdateOn : boolean = false;
   wakatime : Observable<Wakatime[]>;
-  displayedColumns: string[] = ['name', 'squad', 'uid'];
+  displayedColumns: string[] = ['name', 'squad', 'actions'];
   dataSource : any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private wakatimeService :WakatimeService, private router : Router) { }
+  constructor(private wakatimeService :WakatimeService,
+    private snackBar : MatSnackBar,
+    private router : Router, 
+    private userService : UserService) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem('isLoggedIn') != 'true'){
@@ -48,13 +57,58 @@ export class UsersComponent implements OnInit {
       });
   }
 
+//Edit User
   edit(element : any){
-    console.log(element)
+   this.updateValue = element;
+   this.isUpdateOn = true;
   }
+
+//Delete User
   delete(element : any){
-    console.log(element)
+    let result = confirm("Do you want to remove " + element.name + "?");
+    if(result){
+      this.userService.deleteUser(element.uid).subscribe((res)=>{
+        if(res.status == 'ok'){
+          this.snackBar.open(element.name+" deleted Successfully","X", {
+            duration: 1000, verticalPosition : "top"
+          });
+          setTimeout(() => {  window.location.reload(); }, 1000);
+        }
+        else{
+          this.snackBar.open("Error while deleting "+element.name,"X", {
+            duration: 1000, verticalPosition : "top"
+          });
+        }
+      });
+    }
   }
+
+//Refresh User Token
   refresh(element : any){
     console.log(element)
   }
+
+  update(){
+    this.userService.updateUser(this.updateValue,this.updateValue.uid).subscribe((res)=>{
+      if(res.status == 'ok'){
+        this.snackBar.open(this.updateValue.name+" details are updated successfully. Reloading...","X", {
+          duration: 1500, verticalPosition : "top"
+        });
+        this.isUpdateOn = false;
+        window.location.reload();
+      }else{
+        this.snackBar.open("Error while updating "+this.updateValue.name + "details","X", {
+          duration: 1500, verticalPosition : "top"
+        });
+        this.isUpdateOn = false;
+        window.location.reload();
+      }
+    });
+  }
+
+  clear(){
+    this.isUpdateOn = false;
+    window.location.reload();
+  }
+  
 }

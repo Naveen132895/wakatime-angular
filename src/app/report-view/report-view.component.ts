@@ -33,6 +33,9 @@ export class ReportViewComponent implements OnInit {
   localTime : any;
   dailyReports : any;
 
+  nodata : boolean;
+  norange : boolean;
+
   report : any;
   dailyLog : any;
 
@@ -134,12 +137,19 @@ export class ReportViewComponent implements OnInit {
 
   //fetch data from api
   getDaily(date : string) : any {
+    let currentDate = new Date();
+    let dateSent = new Date(date);
+    let diff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+    this.nodata = false;
     if(date != null){
-      this.wakatimeService.getDayWise(this.selectedUser.uid, this.selectedUser.access_token,date).subscribe((data)=>{
-        this.dailyReports = new MatTableDataSource(data['data']);
-        this.dailyLog = data['data'];
-        console.log(this.dailyLog)
-      });
+      if(diff < 15 && diff > 0){
+        this.wakatimeService.getDayWise(this.selectedUser.uid, this.selectedUser.access_token,date).subscribe((data)=>{
+          this.dailyReports = new MatTableDataSource(data['data']);
+          this.dailyLog = data['data'];
+        });
+      }else{
+        this.nodata = true;
+      }  
     }
     else{
       this.snackBar.open("SELECT THE DATE","close", {
@@ -167,11 +177,10 @@ export class ReportViewComponent implements OnInit {
     this.languageTime = [];
 
     if(this.range != ""){
-      console.log(this.range)
       this.wakatimeService.getScheduleReport(this.selectedUser.uid,this.range,this.selectedUser.access_token).subscribe((data)=>{
-        console.log(data['data']);
         this.best_day = data['data'].best_day;
         this.all_data = data['data'];
+        console.log(this.all_data.total_seconds)
         data['data'].languages.forEach(element => {
           this.languageName.push(element.name);
           this.languageTime.push((element.hours * 60) + element.minutes);

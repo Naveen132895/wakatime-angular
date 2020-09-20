@@ -4,8 +4,8 @@
 </div>
 <!-- Header -->
 <div class="header" *ngIf="totalSquad!=null" >
-  <h2 class="squad bbtn">Squads</h2>
-  <h2 class="totalsq bbtn">Total Squad : 0{{totalSquad.length}}</h2>
+  <h3 class="squad bbtn">Squads</h3>
+  <h3 class="totalsq bbtn">Total Squad : 0{{totalSquad.length}}</h3>
 </div> 
 <!-- Search Box -->
 <div class="search" *ngIf="totalSquad!=null">
@@ -17,8 +17,9 @@
     <div class="card">
         <div class="card-body">
           <p class="card-text">{{i+1}}</p>
-            <h2 class="card-title">Squad</h2>
-            <h1>{{squad.res}}</h1>
+            <h1 class="card-title">Squad</h1>
+            <h2 *ngIf="squad.res != 1">{{squad.res}}</h2>
+            <h3 *ngIf="squad.res == 1">Mentors</h3>
             <button class="btn card-btn" (click)="getSquad(squad.res)">View</button>
         </div>
     </div>
