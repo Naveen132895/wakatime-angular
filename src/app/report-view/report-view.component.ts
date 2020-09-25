@@ -159,16 +159,6 @@ export class ReportViewComponent implements OnInit {
     }
   }
 
-  getProjects() : any {
-    this.wakatimeService.getStatus(this.selectedUser.uid, this.selectedUser.access_token).subscribe((data)=>{
-      this.report = data['data'].projects;
-      data['data'].projects.forEach(element => {
-        this.projectTitle.push(element.name);
-        this.projectTime.push((element.hours * 60) + element.minutes);
-      });
-    });
-  }
-
   getSheduleReport() : any{
 
     this.workingProjectTitle = [];
@@ -180,7 +170,6 @@ export class ReportViewComponent implements OnInit {
       this.wakatimeService.getScheduleReport(this.selectedUser.uid,this.range,this.selectedUser.access_token).subscribe((data)=>{
         this.best_day = data['data'].best_day;
         this.all_data = data['data'];
-        console.log(this.all_data.total_seconds)
         data['data'].languages.forEach(element => {
           this.languageName.push(element.name);
           this.languageTime.push((element.hours * 60) + element.minutes);
@@ -198,5 +187,17 @@ export class ReportViewComponent implements OnInit {
       });
     }
   }
+
+  
+  getProjects() : any {
+    this.wakatimeService.getStatus(this.selectedUser.uid, this.selectedUser.access_token).subscribe(data=>{
+      this.report = data['data'].projects.sort(() => Math.random() - 0.5);
+      this.report.forEach(element => {
+        this.projectTitle.push(element.name);
+        this.projectTime.push((element.hours * 60) + element.minutes);
+      });
+    });
+  }
+
 
 }

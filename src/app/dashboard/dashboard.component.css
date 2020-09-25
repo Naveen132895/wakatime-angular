@@ -30,11 +30,41 @@
 }
 .report{
     display: grid;
-    grid-template-columns: 25% 25% 25%;
+    grid-template-columns: 20% 20% 20%;
     justify-content: space-around;
     padding: 3%;
     text-align: center;
 }
 .overall{
     margin: 3% auto auto 2%;
+    text-align: center;
+}
+
+.card-text{
+    font-weight: 600;
+}
+
+.toppers{
+    margin: 1% auto auto 2%;
+    text-align: center;
+}
+
+.table {
+    margin: 3%;
+    color: #405065;
+}
+
+.search-hero {
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+}
+
+.form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9; 
+}
+
+th{
+    background-color: #1b222791;
+    color: white;
 }

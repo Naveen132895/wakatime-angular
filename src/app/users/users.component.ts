@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
           this.snackBar.open(element.name+" deleted Successfully","X", {
             duration: 1000, verticalPosition : "top"
           });
-          setTimeout(() => {  window.location.reload(); }, 1000);
+          setTimeout(() => {  this.router.navigate(['users']); }, 1000);
         }
         else{
           this.snackBar.open("Error while deleting "+element.name,"X", {
@@ -85,30 +85,36 @@ export class UsersComponent implements OnInit {
 
 //Refresh User Token
   refresh(element : any){
-    console.log(element)
+    let result = confirm("Do you want to refresh the access_token for " + element.name + "?");
+    if(result){
+      this.userService.refreshToken(element.refresh_token);
+    }
   }
 
   update(){
     this.userService.updateUser(this.updateValue,this.updateValue.uid).subscribe((res)=>{
       if(res.status == 'ok'){
-        this.snackBar.open(this.updateValue.name+" details are updated successfully. Reloading...","X", {
+        this.snackBar.open(this.updateValue.name+" details are updated successfully.","X", {
           duration: 1500, verticalPosition : "top"
         });
         this.isUpdateOn = false;
-        window.location.reload();
+        this.router.navigate(['users']);
       }else{
         this.snackBar.open("Error while updating "+this.updateValue.name + "details","X", {
           duration: 1500, verticalPosition : "top"
         });
         this.isUpdateOn = false;
-        window.location.reload();
+        this.router.navigate(['users']);
       }
     });
   }
 
   clear(){
+    this.snackBar.open("Update Cancelled","X", {
+      duration: 1500, verticalPosition : "top"
+    });
     this.isUpdateOn = false;
-    window.location.reload();
+    this.router.navigate(['users']);
   }
   
 }

@@ -6,7 +6,7 @@
    <mat-spinner></mat-spinner>
 </div>
 <div class="body">
-   <div *ngIf="!isUpdateOn">
+   <div *ngIf="!isUpdateOn && dataSource != null">
       <!-- Search -->
       <div class="search">
          <input class="form-control" type="text" name="search" (keyup)="applyFilter($event.target.value)" placeholder="Enter Name or Id...">

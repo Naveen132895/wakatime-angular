@@ -1,36 +1,56 @@
 <div class="header" >
-    <h3>Dashboard</h3>
- </div>
- <!-- Loading Spinner -->
- <div class="spinner" *ngIf="false">
-    <mat-spinner></mat-spinner>
- </div>
- <div class="content">
-    <div class="overall">
-       <h2>Overall Board</h2>
-    </div>
+   <h3>Dashboard</h3>
+</div>
+<!-- Loading Spinner -->
+<div class="spinner" *ngIf="allUserData.length == 0">
+   <mat-spinner></mat-spinner>
+</div>
+<div class="content" *ngIf="progradCount != null && mentorCount != null && squadCount != null && allUserData.length > 0">
+   <div class="overall">
+      <h2>Overall Board</h2>
+   </div>
    <div class="report" >
       <div class="card text-white bg-secondary mb-3">
-          <div class="card-header">ProGrads</div>
-          <div class="card-body">
-              <p class="card-text">Overall : 100</p>
-              <p class="card-text">100</p>
-          </div>
+            <div class="card-header">ProGrads</div>
+            <div class="card-body">
+            <p class="card-text">{{progradCount}}</p>  
+            </div>
       </div>
       <div class="card text-white bg-secondary mb-3">
-          <div class="card-header">Mentors</div>
-          <div class="card-body">
-              <p class="card-text">Overall : 10</p>
-              <p class="card-text">10</p>
-          </div>
+            <div class="card-header">Mentors</div>
+            <div class="card-body">
+            <p class="card-text">0{{mentorCount}}</p>
+            </div>
       </div>
       <div class="card text-white bg-secondary mb-3">
-          <div class="card-header">Squads</div>
-          <div class="card-body">
-              <p class="card-text">Overall : 15</p>
-              <p class="card-text">15</p>
-          </div>
+            <div class="card-header">Squads</div>
+            <div class="card-body">
+            <p class="card-text">{{squadCount}}</p>
+         </div>
       </div>
    </div>
- </div>
+   <div class="toppers">
+      <h2>Top performer of the week</h2>
+   </div>
+   <div class="table">
+      <table class="table table-striped">
+         <thead>
+         <tr>
+           <th>S.No</th>
+           <th>Name</th>
+           <th>Daily Average</th>
+           <th>Overall Time</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr *ngFor=" let userData of allUserData; let i = index">
+           <td>{{i+1}}</td>
+           <td>{{userData.username}}</td>
+           <td>{{userData.human_readable_daily_average}}</td>
+           <td>{{userData.human_readable_total}}</td>
+         </tr>
+         </tbody>
+       </table>
+   </div>
+</div>
  
