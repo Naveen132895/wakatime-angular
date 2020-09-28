@@ -98,13 +98,13 @@ export class UsersComponent implements OnInit {
           duration: 1500, verticalPosition : "top"
         });
         this.isUpdateOn = false;
-        this.router.navigate(['users']);
+        window.location.reload();
       }else{
         this.snackBar.open("Error while updating "+this.updateValue.name + "details","X", {
           duration: 1500, verticalPosition : "top"
         });
         this.isUpdateOn = false;
-        this.router.navigate(['users']);
+        window.location.reload();
       }
     });
   }
@@ -114,7 +114,7 @@ export class UsersComponent implements OnInit {
       duration: 1500, verticalPosition : "top"
     });
     this.isUpdateOn = false;
-    this.router.navigate(['users']);
+    window.location.reload();
   }
   
 }
