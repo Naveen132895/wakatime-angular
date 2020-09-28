@@ -6,10 +6,34 @@
    <mat-spinner></mat-spinner>
 </div>
 <div class="content" *ngIf="progradCount != null && mentorCount != null && squadCount != null && allUserData.length > 0">
-   <div class="overall">
-      <h2>Overall Board</h2>
+
+   <div class="table">
+      <div class="toppers">
+         <h2>Top 10 performer of the week</h2>
+      </div>
+      <table class="table table-striped">
+         <thead>
+         <tr>
+           <th>S.No</th>
+           <th>Name</th>
+           <th>Daily Average</th>
+           <th>Overall Time</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr *ngFor=" let userData of allUserData; let i = index">
+           <td>{{i+1}}</td>
+           <td>{{userData.username}} </td>
+           <td>{{userData.human_readable_daily_average}}</td>
+           <td>{{userData.human_readable_total}}</td>
+         </tr>
+         </tbody>
+       </table>
    </div>
    <div class="report" >
+      <div class="overall">
+         <h2>Overall Board</h2>
+      </div>
       <div class="card text-white bg-secondary mb-3">
             <div class="card-header">ProGrads</div>
             <div class="card-body">
@@ -28,29 +52,6 @@
             <p class="card-text">{{squadCount}}</p>
          </div>
       </div>
-   </div>
-   <div class="toppers">
-      <h2>Top performer of the week</h2>
-   </div>
-   <div class="table">
-      <table class="table table-striped">
-         <thead>
-         <tr>
-           <th>S.No</th>
-           <th>Name</th>
-           <th>Daily Average</th>
-           <th>Overall Time</th>
-         </tr>
-         </thead>
-         <tbody>
-         <tr *ngFor=" let userData of allUserData; let i = index">
-           <td>{{i+1}}</td>
-           <td>{{userData.username}}</td>
-           <td>{{userData.human_readable_daily_average}}</td>
-           <td>{{userData.human_readable_total}}</td>
-         </tr>
-         </tbody>
-       </table>
    </div>
 </div>
  

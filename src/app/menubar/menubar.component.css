@@ -1,36 +1,42 @@
- .sidebar {
-    background-color: #1b2227;
-    height: 100%;
-  }
-  svg{
-    position: absolute;
-    margin-left: -5px;
-  }
-  
-  .sidebar li {
-    padding: 7% 2% 2% 7% ;
-  }
+.sidebar {
+  background-color: #1b2227;
+  height: 100%;
+}
+svg{
+  position: absolute;
+  margin-left: -5px;
+}
 
-   .sidebar a {
-    color: white;
-    display: flex;
-    flex-direction: row;
-    padding: 10%;
-    font-size: 1rem;
-    font-weight: 400;
-    text-decoration: none;
-  }
+.sidebar li {
+  padding: 7% 2% 2% 7% ;
+}
 
-  .sidebar a.active {
-    color: #00D48A;
-  }
-  
-  .sidebar a:hover:not(.active) {
-    background-color: #00d48a2f;
-    color: #00D48A;
-  }
-  #logo{
-    margin-top: 5%;
-    width: 80%;
-  
-  } 
+  .sidebar a {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  padding: 10%;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  color: #00D48A;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #3135332f;
+  color: #00D48A;
+}
+#logo{
+  margin-top: 5%;
+  width: 80%;
+
+} 
+.name{
+  /* margin: auto auto auto 30%; */
+  text-align: center  ;
+  color: #00D48A;
+  font-size: large;
+  font-family: cursive;}

@@ -9,16 +9,14 @@ import { UserService } from '../services/user.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit{
 
   constructor(private router : Router, private wakatimeService : WakatimeService , private userService : UserService) { }
 
   progradCount : any;
   mentorCount : any;
   squadCount : any;
-
   allUsers : any;
-
   allUserData : any=[];
 
   ngOnInit(): void {
@@ -33,12 +31,15 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  ngDoCheck() : void{
+    
+    this.allUserData.sort(this.getSorted);
+  }
+
   getAllUser() : any {
     this.userService.getAllUsers().subscribe((data)=>{
       this.allUsers = data;
-      console.log(this.allUsers);
-      this.getTopper();
-    });
+    },(err)=>{console.log(err)},()=>{this.getTopper();});
   }
 
   getProgradCount() : any{
@@ -63,14 +64,13 @@ export class DashboardComponent implements OnInit {
     this.allUsers.forEach(element => {
       this.wakatimeService.getStatus(element.uid,element.access_token).subscribe((data)=>{
         this.allUserData.push(data['data']);
-      },(err)=>{console.log("Error While retriving Data")},()=>{this.allUserData.sort(this.getSorted);});
+      });
     });
   }
 
   getSorted(a : any,b : any) : any{
     const bandA = a.total_seconds;
     const bandB = b.total_seconds;
-
     let comparison = 0;
     if (bandA > bandB) {
       comparison = -1;

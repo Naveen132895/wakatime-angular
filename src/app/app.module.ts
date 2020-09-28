@@ -65,6 +65,7 @@ import { SquadViewComponent } from './squad-view/squad-view.component';
 import { ChartsModule } from 'ng2-charts';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { LoginComponent } from './login/login.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 
@@ -77,7 +78,8 @@ import { LoginComponent } from './login/login.component';
     DashboardComponent,
     ReportViewComponent,
     SquadViewComponent,
-    LoginComponent
+    LoginComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

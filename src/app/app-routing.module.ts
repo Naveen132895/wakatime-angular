@@ -6,6 +6,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import { ReportViewComponent } from './report-view/report-view.component';
 import { SquadViewComponent } from './squad-view/squad-view.component';
 import { LoginComponent } from './login/login.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'report', component: ReportComponent },
   { path: 'users', component: UsersComponent },
   { path: 'viewReport/:uid', component: ReportViewComponent },
-  { path: 'squad/:id', component: SquadViewComponent }
+  { path: 'squad/:id', component: SquadViewComponent },
+  {path: 'error', component: NotfoundComponent},
+  {path: '**', redirectTo: '/error'}
   
 ];
 

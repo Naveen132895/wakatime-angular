@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   updateValue : any;
   isUpdateOn : boolean = false;
   wakatime : Observable<Wakatime[]>;
-  displayedColumns: string[] = ['name', 'squad', 'actions'];
+  displayedColumns: string[] = ['name', 'squad', 'course', 'actions'];
   dataSource : any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

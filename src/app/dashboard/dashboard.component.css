@@ -22,35 +22,42 @@
     margin: 30vh auto auto 47%;
 }
 .content{
-    /* display: flex; */
+    display: flex;
     width: 90%;
-    margin: 10vh 2% 2% 2%;
-    /* justify-content: space-evenly; */
+    margin: 10vh auto 2% auto;
     overflow: hidden;    
 }
 .report{
+    width: 20%;
     display: grid;
-    grid-template-columns: 20% 20% 20%;
-    justify-content: space-around;
-    padding: 3%;
+    grid-template-columns: 90%;
+    margin: 2vh 1% 1% 2%;
     text-align: center;
 }
 .overall{
-    margin: 3% auto auto 2%;
+    margin: 3% auto auto auto;
     text-align: center;
 }
 
+.card{
+    margin-top: 6vh;
+}
 .card-text{
     font-weight: 600;
 }
 
 .toppers{
-    margin: 1% auto auto 2%;
+    margin: 1% auto auto auto;
     text-align: center;
 }
 
+table{
+    border: 1px solid #cfcfcf;
+    
+}
 .table {
-    margin: 3%;
+    width: 100%;
+    margin: 2vh 1% 1% auto;
     color: #405065;
 }
 
@@ -63,8 +70,8 @@
 .form-control {
     box-shadow: 0 10px 40px 0 #B0C1D9; 
 }
-
+/* 
 th{
     background-color: #1b222791;
     color: white;
-}
+} */

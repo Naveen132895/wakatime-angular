@@ -11,12 +11,14 @@ export class MenubarComponent implements OnInit {
 
   constructor(private auth : AuthService,private router: Router) { }
 
+  name : string;
   ngOnInit(): void {
-
+    this.name=sessionStorage.getItem("name");
+    console.log(this.name)
   }
 
   logout() : any {
-    let result = confirm("Do you want to leave?");
+    let result = confirm("Hey "+this.name+", Wanna Logout?");
     if(result){
       let status = this.auth.logout();
       if(status == true){
